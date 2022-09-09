@@ -1,7 +1,8 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
-import environment, { environment as envs } from './shared/environment';
+import environment, { environment as envs } from '@app/shared/environment';
+import { BooksModule } from '@app/modules/books/books.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import environment, { environment as envs } from './shared/environment';
         uri: config.get<string>('mongoUrl'),
       }),
     }),
+    forwardRef(() => BooksModule),
   ],
   controllers: [],
   providers: [],
