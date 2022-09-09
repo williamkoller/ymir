@@ -1,0 +1,33 @@
+version: '3.8'
+services:
+  ymir_api:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    container_name: ymir_api
+    entrypoint: sh -c "pnpm i && pnpm start:dev"
+    env_file:
+      - .env
+    ports:
+      - ${PORT}:${PORT}
+    networks:
+      - ymir_net
+    volumes:
+      - .:/app
+      - /app/node_modules  
+
+  ymir_db:
+    image: mongo:latest
+    container_name: ymirdb
+    ports:
+      - ${MONGO_PORT}:${MONGO_PORT}
+    networks:
+      - ymir_net
+    volumes:
+      - ymirdb_data:/data/mongo/db
+
+volumes:
+   ymirdb_data:
+
+networks:
+  ymir_net:
