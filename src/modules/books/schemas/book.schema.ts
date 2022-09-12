@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
-import { uuid } from 'uuidv4';
+import { randomUUID } from 'crypto';
 export type BookDocument = Book & Document;
 
 @Schema({
@@ -12,7 +12,7 @@ export class Book {
   @Prop({
     type: String,
     required: true,
-    default: () => uuid(),
+    default: () => randomUUID(),
   })
   _id!: string;
 
@@ -71,6 +71,16 @@ export class Book {
     default: true,
   })
   active: boolean;
+
+  @Prop({
+    type: Date,
+  })
+  createdAt: Date;
+
+  @Prop({
+    type: Date,
+  })
+  updatedAt: Date;
 }
 
 export const BookSchema = SchemaFactory.createForClass(Book);

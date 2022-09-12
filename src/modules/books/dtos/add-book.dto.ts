@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class AddBookDto {
   @IsString()
@@ -10,8 +10,8 @@ export class AddBookDto {
   readonly title: string;
 
   @IsString()
-  @IsNotEmpty()
-  readonly headerDescription: string;
+  @IsOptional()
+  readonly headerDescription?: string;
 
   @IsString()
   @IsNotEmpty()

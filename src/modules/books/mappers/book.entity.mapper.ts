@@ -13,6 +13,8 @@ export abstract class BookEntityMapper {
       publishingCompany: book.publishingCompany,
       genre: book.genre,
       active: book.active,
+      createdAt: book.createdAt,
+      updatedAt: book.updatedAt,
     };
   }
 
